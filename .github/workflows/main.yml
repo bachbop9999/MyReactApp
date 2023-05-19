@@ -22,7 +22,7 @@ jobs:
       run: npm install
 
     - name: Build Docker image
-      run: docker build -t myshopimage .
+      run: docker build -t bachhoang1112/myimage:1.0.0 .
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
@@ -31,7 +31,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Push Docker image
-      run: docker push myshopimage
+      run: docker push bachhoang1112/myimage:1.0.0
 
     - name: Deploy to server
       uses: appleboy/ssh-action@master
@@ -44,4 +44,3 @@ jobs:
           docker rm your-container-name || true
           docker pull your-image-name
           docker run -d --name your-container-name -p 80:80 your-image-name
-          
