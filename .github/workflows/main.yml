@@ -13,22 +13,25 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # - name: Set up Docker Compose
-    #   run: |
-    #     sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    #     sudo chmod +x /usr/local/bin/docker-compose
+    - name: Set up Docker Compose
+      run: |
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
 
     - name: Build and push Docker image
       run: |
+        docker build -t myimage:1.0.2 .
+        docker tag myimage:1.0.1 ${{ secrets.DOCKER_USERNAME }}/myimage:1.0.2
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/myimage:1.0.2
 
-    # - name: SSH into EC2 instance and deploy
-    #   uses: appleboy/ssh-action@master
-    #   with:
-    #     host: your-ec2-instance-ip
-    #     username: your-ec2-instance-username
-    #     key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-    #     script: |
-    #       cd /path/to/your/app
-    #       docker-compose pull
-    #       docker-compose up -d
+    - name: SSH into EC2 instance and deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: your-ec2-instance-ip
+        username: your-ec2-instance-username
+        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        script: |
+          cd /path/to/your/app
+          docker-compose pull
+          docker-compose up -d
