@@ -21,7 +21,7 @@ jobs:
     - name: Build and push Docker image
       run: |
         docker build -t myimage:1.0.2 .
-        docker tag myimage:1.0.1 ${{ secrets.DOCKER_USERNAME }}/myimage:1.0.2
+        docker tag myimage:1.0.2 ${{ secrets.DOCKER_USERNAME }}/myimage:1.0.2
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push ${{ secrets.DOCKER_USERNAME }}/myimage:1.0.2
 
