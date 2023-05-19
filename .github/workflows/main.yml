@@ -32,7 +32,6 @@ jobs:
         username: your-ec2-instance-username
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         script: |
-          cd /path/to/your/app
-          docker-compose pull
-          docker-compose up -d
+          docker pull ${{ secrets.DOCKER_USERNAME }}/myimage:1.0.2
+          docker run -p 80:80 -d  ${{ secrets.DOCKER_USERNAME }}/myimage:1.0.2
           
