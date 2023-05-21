@@ -48,7 +48,7 @@ app.post("/task", async (req, res) => {
 
 (async () => {
     try {
-      await mongoose.connect("mongodb://mongodb:27017/task-management", {
+      await mongoose.connect("mongodb://mymongodb:27017/task-management", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
