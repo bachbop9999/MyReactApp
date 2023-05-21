@@ -46,24 +46,16 @@ app.post("/task", async (req, res) => {
   }
 });
 
-mongoose.connect(
-  "mongodb://host.docker.internal:27017/task-management",
-  {
-    // auth: {
-    //   username: "anas",
-    //   password: "12345",
-    // },
-    // authSource: "admin",
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  (err) => {
-    if (err) {
-      console.error("failed to connect to mongoDB");
-      console.error(err);
-    } else {
+(async () => {
+    try {
+      await mongoose.connect("mongodb://host.docker.internal:27017/task-management", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
       console.log("mongodb is running and secured");
       app.listen(PORT);
+    } catch (err) {
+      console.error("failed to connect to MongoDB");
+      console.error(err);
     }
-  }
-);
+  })();
