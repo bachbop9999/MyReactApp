@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Tasks from "./Components/Tasks";
 function App() {
   const inputText = useRef("");
-  const apiUrl = "http://13.229.130.19:8080";
+  const apiUrl = "http://13.250.35.45:8080";
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
