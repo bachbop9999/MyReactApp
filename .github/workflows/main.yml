@@ -35,3 +35,4 @@ jobs:
           cd bachhv/build_agile/MyReactApp
           git pull
           docker-compose up -d --build
+          
