@@ -41,6 +41,7 @@ export const signup = async (req, res)=> {
     const { email, password, confirmPassword, firstName, lastName, bio } = req.body
 
     try {
+        console.log("====HELLO SERVER====")
         const existingUser = await User.findOne({ email })
         const userProfile = await ProfileModel.findOne({ userId: existingUser?._id })
 
