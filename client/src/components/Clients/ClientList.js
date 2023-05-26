@@ -57,7 +57,7 @@ const ClientList = () => {
 
   return (
     <div>
-      <div style={{display: 'flex', justifyContent: 'end', marginTop:'20px'}}>
+      <div style={{display: 'flex', justifyContent: 'end', marginTop:'50px'}}>
         <Button onClick={() => {
           setCurrentId(null);
           setOpen(true);
