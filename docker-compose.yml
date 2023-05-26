@@ -4,7 +4,6 @@ services:
     container_name: client
     build:
       dockerfile: ./client
-      target: production
     ports:
       - '3000:3000'
     depends_on:
