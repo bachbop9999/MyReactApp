@@ -31,7 +31,8 @@ export const signin = async (req, res)=> {
         res.status(200).json({ result: existingUser, userProfile, token })
 
     } catch (error) {
-        res.status(500).json({ message: JSON.stringify(error)})
+        console.log(error.message);
+        res.status(500).json({ message: "Something went wrong"})
     }
 }
 
