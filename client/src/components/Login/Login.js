@@ -5,10 +5,9 @@ import styles from './Login.module.css'
 import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google'
 import jwtDecode from 'jwt-decode'
 import {useDispatch} from 'react-redux'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { signup, signin } from '../../actions/auth'
-import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import { Button, Paper, Grid, Typography, Container } from '@material-ui/core'
 import { createProfile } from '../../actions/profile'
 import { useSnackbar } from 'react-simple-snackbar'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -77,10 +76,7 @@ const Login = () => {
     return (
         <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={2}>
-        {/* <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> */}
-        <Typography style={{marginTop: '20px'}} component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
+              <Typography style={{marginTop: '20px'}} component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             { isSignup && (

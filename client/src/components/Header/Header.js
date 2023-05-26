@@ -38,17 +38,7 @@ const Header = () => {
         setUser(JSON.parse(localStorage.getItem('profile')))
     },[location])
 
-    
-    //GET REPO INFO FROM GITHUB
-    // useEffect(() => {
-    //   getMetaData()
-    // },[])
 
-
-    // const getMetaData = async() => {
-    //   const response = await axios.get('https://api.github.com/repos/panshak/arc')
-    //       // console.log(response.data);
-    // }
 
     const logout =() => {
         dispatch({ type: 'LOGOUT' })
@@ -60,13 +50,11 @@ const Header = () => {
     useEffect(()=> {
         const token = user?.token
         // setUser(JSON.parse(localStorage.getItem('profile')))
-        //If token expires, logout the user
         if(token) {
             const decodedToken = decode(token)
             if(decodedToken.exp * 1000 < new Date().getTime()) logout()
         }
-        // eslint-disable-next-line
-    }, [location, user]) //when location changes, set the user
+    }, [location, user])
 
 
 
@@ -88,11 +76,6 @@ const Header = () => {
     setOpen(false);
   };
 
-
-  const openLink =(link) => {
-      history.push(`/${link}`)
-      setOpen(false);
-  }
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
