@@ -111,15 +111,6 @@ const Header = () => {
     prevOpen.current = open;
   }, [open]);
 
-
-
-
-    if(!user) return (
-        <div className={styles.header2}>
-         <img style={{width: '50px', cursor: 'pointer'}} onClick={()=> history.push('/')} src="https://i.postimg.cc/hGZKzdkS/logo.png" alt="arc-invoice" />
-        <button onClick={()=> history.push('/login')} className={styles.login}>Get started</button>
-        </div>
-    )
     return (
         <div className={styles.header}>
             <div className={classes.root}>
@@ -141,7 +132,7 @@ const Header = () => {
               <Paper elevation={3}>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown} >
-                    <MenuItem onClick={() => openLink('settings') }>{(user?.result?.name).split(" ")[0]}</MenuItem>
+                    {/* <MenuItem onClick={() => openLink('settings') }>{(user?.result?.name)?.split(" ")[0]}</MenuItem> */}
                     <MenuItem onClick={()=> logout()} >Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>

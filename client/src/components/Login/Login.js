@@ -58,7 +58,7 @@ const Login = () => {
         try {
             dispatch({ type: "AUTH", data: {result, token}})
 
-            window.location.href='/dashboard'
+            window.location.href='/customers'
             
         } catch (error) {
             console.log(error)
@@ -71,16 +71,16 @@ const Login = () => {
 
 
     if(user) {
-      history.push('/dashboard')
+      history.push('/customers')
     }
 
     return (
         <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={2}>
-        <Avatar className={classes.avatar}>
+        {/* <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
+        </Avatar> */}
+        <Typography style={{marginTop: '20px'}} component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             { isSignup && (
@@ -126,7 +126,7 @@ const Login = () => {
               </Button>
             </Grid>
           </Grid>
-        <Link to="forgot"><p style={{textAlign: 'center', color: '#1d7dd6', marginTop: '20px'}}>Forgotten Password?</p></Link>
+        {/* <Link to="forgot"><p style={{textAlign: 'center', color: '#1d7dd6', marginTop: '20px'}}>Forgotten Password?</p></Link> */}
         </form>
       </Paper>
     </Container>
