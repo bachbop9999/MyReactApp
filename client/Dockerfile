@@ -1,24 +1,13 @@
-FROM node:14-alpine AS builder
-ENV NODE_ENV production
+FROM node
 
 WORKDIR /app
 
-COPY client/package.json .
-COPY client/yarn.lock .
-RUN yarn install --production
+COPY package.json .
 
-COPY client .
+RUN npm install
 
-RUN npm run build
+COPY . .
 
+EXPOSE 5000
 
-FROM nginx:1.21.0-alpine as production
-ENV NODE_ENV production
-
-COPY --from=builder /app/build /usr/share/nginx/html
-
-COPY ./client/nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm","start"]
