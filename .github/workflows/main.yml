@@ -25,7 +25,7 @@ jobs:
         docker build -t my-react-app-fe .
         docker tag my-react-app-fe ${{ secrets.DOCKER_USERNAME }}/my-react-app-fe
         docker push ${{ secrets.DOCKER_USERNAME }}/my-react-app-fe
-        cd server
+        cd ../server
         docker build -t my-react-app-be .
         docker tag my-react-app-be ${{ secrets.DOCKER_USERNAME }}/my-react-app-be
         docker push ${{ secrets.DOCKER_USERNAME }}/my-react-app-be
