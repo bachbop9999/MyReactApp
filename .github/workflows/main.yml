@@ -13,17 +13,23 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # - name: Set up Docker Compose
-    #   run: |
-    #     sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    #     sudo chmod +x /usr/local/bin/docker-compose
+    - name: Set up Docker Compose
+      run: |
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
 
-    # - name: Build and push Docker image
-    #   run: |
-    #     docker build -t my-react-app .
-    #     docker tag my-react-app ${{ secrets.DOCKER_USERNAME }}/my-react-app
-    #     docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-    #     docker push ${{ secrets.DOCKER_USERNAME }}/my-react-app
+    - name: Build and push Docker image
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        cd client
+        docker build -t my-react-app-fe .
+        docker tag my-react-app-fe ${{ secrets.DOCKER_USERNAME }}/my-react-app-fe
+        docker push ${{ secrets.DOCKER_USERNAME }}/my-react-app-fe
+        cd server
+        docker build -t my-react-app-be .
+        docker tag my-react-app-be ${{ secrets.DOCKER_USERNAME }}/my-react-app-be
+        docker push ${{ secrets.DOCKER_USERNAME }}/my-react-app-be
+
 
     - name: SSH into EC2 instance and deploy
       uses: appleboy/ssh-action@master
@@ -32,6 +38,7 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         script: |
-          cd bachhv/build_agile/MyReactApp
-          git pull
-          docker-compose up -d --build
+          cd bachhv/build3
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker-compose pull
+          docker-compose up -d
